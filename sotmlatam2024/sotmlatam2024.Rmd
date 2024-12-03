@@ -9,6 +9,8 @@ output: beamer_presentation
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+# Introducción
+
 ## Estructura de la presentación
 
 * Antecedentes en general del uso de mapas para la agroecología. tomar del proyecto de extensión
@@ -25,6 +27,7 @@ knitr::opts_chunk$set(echo = FALSE)
 * El proyecto en Argentina
 
 * El mapa de luján
+
 
 
 
