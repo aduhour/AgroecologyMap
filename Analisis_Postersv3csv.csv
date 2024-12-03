@@ -1,0 +1,55 @@
+Nombre	Contactos	Posee Mapa	El mapa tiene atribucion	Tipo de mapa usado	Forma en la que se uso	Presenta_una_DB	incluye_escala	incluye_norte	nota
+Incidencia del pastoreo rotativo bovino en mejora forrajera y sanidad animal en el noroeste de Buenos Aires	passone.paz@inta.gob.ar	si;si;	no;no;	qgis svg provincia/partidos; imagen satelital;	Resaltar partido; Resaltar poligono de estudio;	no	no	no	
+Mapeo de Harineros de Trigo Agroecologico en la Region Pampeana Argentina	benedetto.maria@inta.gob.ar	si;si;	no;no;	ign; qgis svg argentina/provincias;	Resaltar puntos; Resaltar provincias	si;  productores agroecologicos;	no	si	https://harineros-app.vercel.app/ | es una aplicación de react, capa de datos | Openstreetmap ;Mapa interactivo, tipo Umap
+Cartografia de establecimientos agroecologicos		si	no	Umap	Resaltar partido y puntos;	si; productores agroecologicos;	no	no	la db es osm
+Bibliografia y agroecologia		si	no	qgis svg argentina+antartida/provincias	Resaltar puntos; Resaltar provincias	si; bichos;	si	si	
+Distancias de derivas de plaguicidas de uso agropecuario y sus implicancias para promover la agroecologia en zonas de exclucion	guillermohough@yahoo.com	si	no	Google Earth	Resaltar un poligono; imagen satelital;	no	no	no	
+Evaluacion inicial del Registro de Productores Agroecologicos de Provincia de Buenos Aires		si;si;si;	no;no;no;	qgis svg provincia/partidos; qgis svg provincia/partidos; qgis svg argentina/provincia; 	Resaltar burbujas; Resaltar burbujas; Resaltar provincia	puede ser	si	no	 el mapa se atribuye a una persona;
+Mapa de Practicas Horticolas en Mercedes: Georreferenciacion y Clasificacion de Unidades Productivas		si;si;	no;no;	Google Earth	imagen satelital; Resaltar puntos; imagen satelital; Resaltar partido; Resaltar poligonos;	no	no	no	
+Nodos Agroecologicos Territoriales (NAT): una propuesta de articulacion intersectorial para el escalamiento de la agroecologia.		si	no	qgis svg argentina/provincias;	Resaltar puntos;	no	no	no	
+Caracteristicas de las Producciones agroecologicas en mercedes, Provincia de Buenos Aires		si;si;	no;no;	qgis  svg provincia/partidos; qgis svg sudamerica/argentina;	Resaltar partido; Resaltar argentina;	no	no	no	
+Agricultura Familiar, Seguridad y Soberania Alimentaria en Exaltacion de la Cruz, Campana y Lujan		si;si;	no;no;	GoogleMaps 2024; qgis svg provincia/partidos	Resaltar partidos; Resaltar partidos;	no	si	si	
+Construyendo experiencias en la produccion agroecologica en el norte de Bs As		si	no	qgis svg provincia/partidos; 	Resaltar partidos;	no	si	si	
+La Quinta XVII: agroecologia pensando en el desarrollo de la comunidad		si;si;	no;no;	GoogleMaps 2024; Google Earth;	Resaltar punto; Resaltar partido; imagen satelital;	no	no	no	
+Ganaderia Regenerativa en Quinta Esencia		si	no	Google Earth	imagen satelital; Resaltar poligonos;	no	no	no	
+La produccion familiar agroecologica en el periurbano oeste del GBA: La UNLu y un caso de investigacon accon en el territorio		si	no	Openstreetmap	Resaltar Limites de partidos	no	si	si	
+Sistema Tomasa, Conjunto de Herramientas Multiproposito para la Gestion Ambiental	agroecologia@chascomus.gob.ar	si;si;si;si;si;	si;no;no;no;no;	Google maps 2024 y Imagenes satelitales Terrametris;	imagen satelital; HEAT MAP; Resaltar puntos; Resaltar poligonos;	si; 	no	no	
+Impacto de la Horticultura en arroyos bonaerenses		si;si;si;si;	no;no;no;no;	qgis svg argentina/provincia;  qgis svg provincia/partidos; imagen satelital; imagen satelitale;	Resaltar provincia, Resaltar partidos; Resaltar poligono; Resaltar uso del suelo;	no	si	si	compara una imagen satelital de una zona urbana contra una imagen satelital de una zona rural
+Rancho Aparte, Experencia Inspiradora		si	no	Google maps 2024	Resaltar punto; Resaltar partido	no	no 	no 	
+El huerto interior, Analisis del proceso de transcicion agroecologica aplicando el metodo LUME		si	no	Google Earth	Resaltar provincia; Resaltar punto; Imagen satelital;	no	no	no	
+Relato de Experiencia Unidad Horticola Agroecologica Textiles Pigue		si	no	Google Earth	imagen satelital; 	no	no	no	
+Transcicion del acceso a alimentos agroecologicos en “la hora feliz”, comedor popular de villa arguello, berisso		si	no	Google maps 2024	Resaltar poligonos;	no	no	no	
+Defensa de la Tierra en Feria Franca Lujan		si	no	Google maps 2024	imagen satelital; 	no	no	no	trata de resaltar un poligono, pero no lo hacen
+Implementacion del Programa de Promocion de la Agroecologia en Bragado: Un analisis cualitativo de desarrollo y desafios		si;si;	no	Google maps 2024 + filtros de color; qgis svg provincia/partidos	Resaltar puntos; Resaltar partidos	no	no	no	
+Presentacion del Proyecto “Tierra Viva” en la Universidad Nacional de Avellaneda 		si	no	Google maps 2024	Resaltar poligono;	no	no	si	
+“la edilia” experiencia de transcicion agroecologica familiar en el noroeste de la Pcia de BsAs		si	no	croquis del campo	Resaltar poligono	no	no	no	
+Manejo de un rodeo de cria y produccion de huevos pastoriles bajo un sistema agroecologico		si	no 	imagen satelital, no se puede determinar	imagen satelital	no	no	no	
+Relaciones extra pediales para el sostenimiento agroecologico en los partidos de pergamino, saladillo y guamini		si;si;	no;no;	qgis svg argentina/provincias; qgis svg provincia/partido;	Resaltar provincia; Resaltar partidos;	no	si	si	
+Reina de Macedonia: una experiencia de apicultura de agroecologica en el partido de bragado		si;si;si;	no;no;no;	qgis svg provincia/partidos; GoogleMaps; GoogleMaps;	Resaltar partido; Resaltar punto; Resaltar punto;	no	no	no	
+Costo oculto de la produccion agricola. El caso de Bolivar, Buenos aires		si;si;si;si;	si;si;si;si;	Google Earth; Google Earth; qgis svg provincia/partidos heatmap; qgis svg provincia/partidos heatmap;	imagen satelital; imagen satelital; heatmap; heatmap;	no	si	no	
+Huerta de la cooperativa las madreselvas: espacio de integracion comunnitaria, restauracion ecologica y democratizacion de saberes		si	no	Google Earth	imagen satelital;  Resaltar recorridos de aves;	no	no	no	
+Percepciones en torno a la agreecologia en la universidad nacional de avellaneda		si;si;si;	no;no;no;	qgis svg argentina/provincia; qgis  svg provincia/partidos; qgis svg amba/partido; 	Resaltar provincia;  Resaltar partido;	no	no	no	
+Los sistemas participativos de garantia en clave ecofeminista		si;si;	no;no;	qgis svg provincia; qgis svg amba/partidos;	Resaltar provincia/partidos;	Si (productores de la spg que es publica)	si	si	
+nodo agüero moron		si	no	Google maps 2024	resaltar una ubicación (calle)	no	no	no	captura de pantalla sobre unas calles de moron
+Construyendo la Red de la Universidad Nacional de Lujan Para la agricultura familiar	leomotta12@yahoo.com.ar	si	no	GoogleMaps 2018	Resaltar puntos	no	no	no	los puntos son agencias estatales y productores
+Estrategias para reducir adversidades en un monte frutal agroecologico		si	no	Google Earth	imagen satelital, Resaltar un poligono	no	no	no	incluye coordenadas
+Uso productivo del suelo periurbano. Los parques agrarios como sistema basico territorial y herramienta de gestion ambiental y agroecologica		si	si	Google Earth	imagen satelital	no	no	no	
+Caracterizacion de las ferias agroecologicas del municipio general pueyrredon, provincia de buenos aires (argentina)		si	no	qgis svg partido/sectores; 	Resaltar puntos; (ferias) en mar del plata	no	si	si	elaboracion propia en base a cartografia, procesado con pilzren
+Sistemas Participativos de garantia. Experiencias en el sudeste bonaerense		si;si;si;	si;si;si;	qgis svg sudamerica/argentina; qgis svg provincia/partidos; qgis svg partidos/municipios	Resaltar puntos (productores )	no	si	no	Menciona OpenstreetMap
+del juego a la feria de ciencias. Desafios y posibilidades de la inclusion de la agroecologia en la enseñanza en la escuela secundaria		si	no	qgis svg provincia/partidos	resaltar partido	no	no	no	mapa extraido de wikipedia
+Promover la compra local mayorista de frutas y verduras agroecologicas de la grucultura familiar: estrategia compartida entre la cooperativa Che Verde y las instituciones.		si	no	Google Maps	imagen satelital; sobre la ubicación; Resaltar punto;	no	no	no	
+transformacion y resiliencia: la experiencia de la cooperativa UST		si;si;si;	no;no;no;	qgis svg provincia/partidos; qgis svg amba/partidos; qgis svg partidos/municipios;	Resaltar partido; 	no	no	no	
+El rol del estado nacional en la construccion de politicas publicas para la agroecologia		si;si;si;si;	si	GoogleMaps; mapa base; qgis argentina/provincias/partidos/municipios	resaltar puntos (oficinas gubernamentales)	si (REDAM)	si	si	red de municipios agroecologicos 
+Cambio Rural: Grupo “caminos de tierra”		si	si	Google Earth	Resaltar puntos (establecimientos del grupo); imagen satelital del amba	no	no	no	
+Red pluviometrica de lujan y alrededores. Promocion de sistemas productivos resilientes		si;si;	no;no;	qgis svg partidos; qgis svg partidos/barrios;	resaltar puntos (puntos de la red publiometrica)	no	no	no	
+Herramientas para re-pensar los procesos de transcicion sustentable: visibilizacion de las producciones extensivas con bases agroecologicas en el partido de general pueyrredon (buenos aires, argentina)		si;si;si;si;	si;si;si;si;	qgis svg argentina/provincias; qgis svg provincia/partidos; qgis svg partido;  IGN, Openstreetmap;	Resaltar provincia; Resaltar partido; Resaltar puntos (hectareas destinadas a agroecologia); Resaltar Burbujas	no	si	si	
+Registro de productores agroecologicos del ministerio de desarrollo agrario de la provincia de buenos aires. Resultados parciales del partido de general pueyrredon		si	no	qgis svg partido	resaltar puntos (productores agro)	no	no	si	
+Actualizacion de la base de datos georreferenciada de producciones intensivas agroecologicas del partido de general pueyrredon		si	si	Google maps 2024 + GoogleMyMaps	resaltar puntos (productores 	Si (capa de google maps)	no	no	
+Red provincias de nutricionistas para el fortalecimiento de la agroecologia		si	no	hoja a2	resaltar reccorridos, puntos, limites partido de lobos	no	no	no	foto de un mapa hecho a mano
+Una propuesta agroecologica en el partido de saladillo, provincia de buenos aires		si;si;	no;no;	qgis svg argentina/provincias; qgis svg provincia/partidos; es el mapa de wkipedia del partido	resaltar partido	no	no	no	
+Mapeo sobre experiencias en semillas nativas y criollas en la provincia de buenos aires y la ciudad de buenos aires		si;si;	si;si;	scribblemaps(GoogleMaps); ofrece qr;	Resaltar puntos;  Resaltar provincias/partidos	Parece (qr)	no	no	quizas lo hizo en la version gratuita, pero por ahi esta persona pago por el servicio de scribblemap
+sinergia nativa		si	si	Google Earth	resaltar poligono de la escuela	no	si	si	
+control biologico con artropodos		si	si	Google Earth	resaltar poligono de la escuela	no	si	si	
+espacio agroecologico		si	si	Google Earth	resaltar poligono de la escuela	no	si	si	
+Regenerar nuestro suelo		si;si;	no;no;	Google maps 2024; qgis svg provincia/partidos;	Resaltar puntos; Resaltar partido	no	no	no	
+Taller “de los resudios a la huerta familiar agroecologica: compost ciudadano” 		si	no	qgis svg provincia/partidos	resaltar partido 	no	no	no	
