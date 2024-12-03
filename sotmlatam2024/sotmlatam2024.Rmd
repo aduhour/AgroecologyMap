@@ -36,28 +36,56 @@ En conjunto con ello, se han sancionado normativas que limitan el uso de agroqu�
 
 Este proceso de promoción y fortalecimiento de planteos productivos novedosos se enmarca en un entorno sociocultural y ambiental de disputa con otros modelos productivos y del uso y apropiación de los recursos naturales y también de uso y apropiación de los saberes y conocimientos, en tanto bienes comunes.
 
-
-El partido de Luján, Provincia de Buenos Aires,  presenta una configuración territorial que guarda relación con los cambios productivos y sociales que se registran en la región en las últimas décadas, y que se manifiestan en forma de conflictos entre usos del suelo agropecuarios y residenciales que pugnan en un área de interfase.
+<!-- Imagen cambios en el uso -->
 
 
 ## Introducción
 
-El conocimiento y análisis de estos procesos no puede ser ajeno a los actores involucrados, productores, consumidores, sus organizaciones, en interacción con instituciones estatales específicas del sector agropecuario y las vinculadas a la educación y la investigación.
 
-Para la promoción de modelos productivos alternativos también es necesaria una apertura del acceso a la información local, de tipo geográfica, que no necesariamente está disponible abiertamente y tampoco es ajena a procesos de cercamiento y privatización. 
+El partido de Luján, Provincia de Buenos Aires,  presenta una configuración territorial que guarda relación con los cambios productivos y sociales que se registran en la región en las últimas décadas, y que se manifiestan en forma de conflictos entre usos del suelo agropecuarios y residenciales que pugnan en un área de interfase.
+
+<!-- Conflictos buzai? -->
+
+
+## Introducción
+
+El conocimiento y análisis de estos procesos debe involucrar a sus actores:
+
+-  productores, consumidores, sus organizaciones, en interacción con instituciones estatales específicas del sector agropecuario y las vinculadas a la educación y la investigación.
+
+## Introducción
+
+La promoción de modelos productivos alternativos debe ir unida a una apertura del acceso a la información 
+
+<!-- local -->
+
+<!-- de tipo geográfica, que  -->
+
+La información relativa no necesariamente está disponible abiertamente y tampoco es ajena a procesos de cercamiento y privatización.
 
 <!-- * Antecedentes en general del uso de mapas para la agroecología. tomar del proyecto de extensión -->
 
 ## Introducción
 
-La producción de este tipo de información por parte de las instituciones u organizaciones públicas utiliza distintas barreras que dificultan su acceso, tanto para su reinterpretación como para su mejora.
+La producción de este tipo de información por parte de las instituciones u organizaciones públicas utiliza herramientas que se transforman en barreras que dificultan el acceso, tanto para su reinterpretación como para su mejora.
 
 La información de tipo geográfica, tanto desde el conocimiento territorial de las y los ciudadanos como desde la producción que se realiza en las instituciones públicas constituyen un bien común digital, y por lo tanto es necesario "levantar" esas barreras haciendo estos datos de acceso libre.
+
+## Introducción
+
+Existen iniciativas de organizaciones sociales e instituciones públicas, en distintos municipios y regiones, con respecto al mapeo de producciones agroecológicas y producciones alternativas (Tuchin, 2020; Red Interregional de Nodos Agroecológicos, 2023; Agencia de Extensión Mar del Plata - INTA y col., 2022; Inta Informa 2022). Sin embargo, todas se encuentran basadas en un servicio de mapas privado, la posibilidad de agregar o modificar información es limitada, y su descarga y reutilización no se encuentra necesariamente en un formato abierto.
+
+## Introducción
 
 A partir de una demanda respecto de la sistematización de la información relativa a la producción agroecológica en el municipio de Luján, se propuso la implementación de un proceso participativo para la construcción de criterios respecto de los datos relevantes, su sistematización y la apropiación de herramientas para la construcción de mapas colaborativos.
 
 
+## Introducción
+
+Las consecuencias ambientales y sociales de estos modelos han puesto de manifiesto la necesidad de un nuevo paradigma agroproductivo, donde la Agroecología surge como una ciencia que permite abarcar los desafíos de la sustentabilidad de sistemas esencialmente complejos (Di Ciocco y Momo, 2011; Sarandón, 2019)
 Esta propuesta de ponencia busca compartir los resultados y desafíos de esta experiencia.
+
+
 
 ## Metodología
 
