@@ -1,0 +1,100 @@
+---
+title: "Analisis de Mapas Utilizados en Posters"
+author: "Juan Jara"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+#Librerias:
+library(tidyverse)
+library(tibble)
+library(dplyr)
+library(stringr)
+
+#Datos:
+datos <- read.csv2("Analisis_Postersv3csv.csv", sep = "\t")
+
+#Funciones 
+
+#Funcion para pasar a frecuencia, los valores absolutos.
+pasar_n_a_proporcion <- function(x){ #recibe $n | devuelve vector para colocar en $proporcion
+  total <- sum(x)
+  i <- 1
+  for (variable in x) {
+    x[i] <- x[i] / total
+    i <- i +1
+  }
+  return(x)
+}
+
+
+```
+
+
+
+```{r}
+
+#54 publicaciones con mapas
+
+cantidad_de_mapas <- tibble(mapas = datos$Posee.Mapa) %>%  count(mapas)
+cantidad_de_mapas$cantidad <- c(1,2,3,4,5)
+
+cantidad_de_mapas$proporcion <- pasar_n_a_proporcion(cantidad_de_mapas$n)
+
+ggplot(cantidad_de_mapas, aes(x= cantidad, y = proporcion ))+
+  geom_bar(stat = "identity")+
+  labs(title = "Cantidad de Mapas por publicacion")
+
+
+
+```
+
+
+```{r}
+google <- tibble( tipo = datos$Tipo.de.mapa.usado) %>%
+  mutate(tipo = tolower(tipo),
+         match = str_c("google", collapse = '|'),
+         key_word = str_extract_all(tipo, match)) %>%
+  select(-match)
+
+osm <- tibble(tipo = datos$Tipo.de.mapa.usado) %>% 
+  mutate(tipo = tolower(tipo),
+         match = str_c("openstreetmap", collapse = '|'),
+         key_word = str_extract_all(tipo, match)) %>%
+  select(-match)
+
+cuantos_usan_google <-  unlist(google$key_word, use.names = FALSE) %>% length()
+cuantos_usan_osm <-  unlist(osm$key_word, use.names = FALSE) %>% length()
+
+otros <- 54 - cuantos_usan_google - cuantos_usan_osm
+
+servicios <- tibble(categoria = c("Servicios de Google", "OpenStreetMap" ,"Otros"),
+                n = c(cuantos_usan_google, cuantos_usan_osm  , otros ))
+
+
+servicios$proporcion <- pasar_n_a_proporcion(servicios$n)
+
+ggplot(servicios, aes(x = "", y = proporcion, fill = categoria))+
+  geom_col(color = "black")+
+  geom_text(aes(label = categoria), position = position_stack(vjust = 0.5))+
+  coord_polar(theta = "y")+
+  labs(title  = "Servicios Utilizados")+
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank(),
+        panel.grid = element_blank(),
+        panel.background = element_rect(fill = "#ebf2ff"),
+        plot.background = element_rect(fill = "#ebf2ff"),
+        legend.position = "none")
+
+
+```
+
+
+
