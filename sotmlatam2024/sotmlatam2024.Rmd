@@ -46,11 +46,6 @@ pasar_n_a_proporcion <- function(x){ #recibe $n | devuelve vector para colocar e
 # Introducción
 
 
-
-<!-- ![](img/Logo_-_SotM_Latam_2024_600.png) -->
-
-
-
 ## Introducción
 
 En la República Argentina se han fortalecido organizaciones de productores y productoras que llevan adelante sus emprendimientos en el marco de la Agroecología, se han creado redes de comercialización y se han implementado sistemas participativos de certificación y de garantías. 
@@ -94,31 +89,35 @@ La producción de este tipo de información por parte de las instituciones u org
 
 <!-- Análisis de datos del CPA -->
 
-## Objetivos
+## Introducción
 
 La información de tipo geográfica, tanto desde el conocimiento territorial de las y los ciudadanos como desde la producción que se realiza en las instituciones públicas constituyen un bien común digital, y por lo tanto es necesario "levantar" esas barreras haciendo estos datos de acceso libre.
 
-
-
-## Objetivos
-
-A partir de una demanda respecto de la sistematización de la información relativa a la producción agroecológica en el municipio de Luján, se propuso la implementación de un proceso participativo para la construcción de criterios respecto de los datos relevantes, su sistematización y la apropiación de herramientas para la construcción de mapas colaborativos.
-
-
-## Objetivos
+## Introducción
 
 Las consecuencias ambientales y sociales de estos modelos han puesto de manifiesto la necesidad de un nuevo paradigma agroproductivo, donde la Agroecología surge como una ciencia que permite abarcar los desafíos de la sustentabilidad de sistemas esencialmente complejos (Di Ciocco y Momo, 2011; Sarandón, 2019)
-Esta propuesta de ponencia busca compartir los resultados y desafíos de esta experiencia.
+
+## Objetivos
+
+<!-- Con la metodología propuesta se busca contribuir a favorecer instancias de construcción de conocimiento, a partir del mapeo de problemas, fortaleciendo vínculos comunitarios. Del mismo modo, realizar un aporte para la construcción de políticas públicas basadas en información relevante y validada por los actores de la producción agroecológica. -->
+
+- Favorecer instancias de construcción de conocimiento, a partir del mapeo de problemas, fortaleciendo vínculos comunitarios.
+
+- Realizar un aporte para la construcción de políticas públicas basadas en información relevante y validada por los actores de la producción agroecológica. 
+
+- Esta presentación busca compartir los resultados y desafíos de esta experiencia.
+
 
 
 
 ## Metodología
 
+## Objetivos
+
+A partir de una demanda respecto de la sistematización de la información relativa a la producción agroecológica en el municipio de Luján, se propuso la implementación de un proceso participativo para la construcción de criterios respecto de los datos relevantes, su sistematización y la apropiación de herramientas para la construcción de mapas colaborativos.
+
 Al efecto, se propuso la construcción de una cartografía colaborativa de los emprendimientos agroecológicos del partido, y de su entorno ecológico y ambiental utilizando OpenStreetMap, teniendo en cuenta que permite el aporte de múltiples datos de tipo geográfico, su uso con diferentes aplicaciones y dispositivos, y se garantiza su disponibilidad pública mediante una licencia de uso adecuada.
 
-Con la metodología propuesta se busca contribuir a favorecer instancias de construcción de conocimiento, a partir del mapeo de problemas, fortaleciendo vínculos comunitarios. Del mismo modo, realizar un aporte para la construcción de políticas públicas basadas en información relevante y validada por los actores de la producción agroecológica.
-
-## Otros
 
 
 
@@ -136,7 +135,7 @@ cantidad_de_mapas$Cantidad <- c(1,2,3,4,5)
 cantidad_de_mapas$Proporción <- pasar_n_a_proporcion(cantidad_de_mapas$n)
 ```
 
-```{r grafico posters}
+```{r grafico-posters, fig.width = 3.5,fig.height=2.5,fig.align='center'}
 ggplot(cantidad_de_mapas, aes(x= Cantidad, y = Proporción ))+
   geom_bar(stat = "identity") +
   #labs(title = "Cantidad de mapas por publicación")+
@@ -149,7 +148,7 @@ ggplot(cantidad_de_mapas, aes(x= Cantidad, y = Proporción ))+
 
 ### Cantidad de mapas según mapa base.
 
-```{r mapa base, echo=FALSE}
+```{r mapa-base, echo=FALSE}
 google <- tibble( tipo = datos$Tipo.de.mapa.usado) %>%
   mutate(tipo = tolower(tipo),
          match = str_c("google", collapse = '|'),
@@ -174,7 +173,7 @@ servicios <- tibble(categoria = c("Servicios de Google", "OpenStreetMap" ,"Otros
 servicios$proporcion <- pasar_n_a_proporcion(servicios$n)
 ```
 
-```{r grafico mapa base}
+```{r grafico-mapa-base}
 ggplot(servicios, aes(x = "", y = proporcion, fill = categoria))+
   geom_col(color = "black")+
   geom_text(aes(label = categoria), position = position_stack(vjust = 0.5))+
@@ -201,7 +200,7 @@ ggplot(servicios, aes(x = "", y = proporcion, fill = categoria))+
 
 <!-- * La etiqueta en OSM -->
 
-## Una etiqueta en OSM
+# Una etiqueta en OSM
 
 <!-- * El proyecto en Argentina -->
 
