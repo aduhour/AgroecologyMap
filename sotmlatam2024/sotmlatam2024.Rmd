@@ -16,7 +16,32 @@ bibliographystyle: apalike-es
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
+
+#Librerias:
+library(tidyverse)
+library(tibble)
+library(dplyr)
+library(stringr)
+
+#Datos:
+datos <- read.csv2("../PostersCPA/Analisis_Postersv3csv.csv", sep = "\t")
+
+#Funciones 
+
+#Funcion para pasar a frecuencia, los valores absolutos.
+pasar_n_a_proporcion <- function(x){ #recibe $n | devuelve vector para colocar en $proporcion
+  total <- sum(x)
+  i <- 1
+  for (variable in x) {
+    x[i] <- x[i] / total
+    i <- i +1
+  }
+  return(x)
+}
+
+
 ```
+
 
 # Introducción
 
@@ -30,6 +55,8 @@ knitr::opts_chunk$set(echo = FALSE)
 
 En la República Argentina se han fortalecido organizaciones de productores y productoras que llevan adelante sus emprendimientos en el marco de la Agroecología, se han creado redes de comercialización y se han implementado sistemas participativos de certificación y de garantías. 
 
+## Introducción
+
 En conjunto con ello, se han sancionado normativas que limitan el uso de agroquímicos en diferentes jurisdicciones y se han iniciado procesos de reconversión de las producciones existentes. 
 
 ## Introducción
@@ -37,14 +64,6 @@ En conjunto con ello, se han sancionado normativas que limitan el uso de agroqu�
 Este proceso de promoción y fortalecimiento de planteos productivos novedosos se enmarca en un entorno sociocultural y ambiental de disputa con otros modelos productivos y del uso y apropiación de los recursos naturales y también de uso y apropiación de los saberes y conocimientos, en tanto bienes comunes.
 
 <!-- Imagen cambios en el uso -->
-
-
-## Introducción
-
-
-El partido de Luján, Provincia de Buenos Aires,  presenta una configuración territorial que guarda relación con los cambios productivos y sociales que se registran en la región en las últimas décadas, y que se manifiestan en forma de conflictos entre usos del suelo agropecuarios y residenciales que pugnan en un área de interfase.
-
-<!-- Conflictos buzai? -->
 
 
 ## Introducción
@@ -67,20 +86,26 @@ La información relativa no necesariamente está disponible abiertamente y tampo
 
 ## Introducción
 
-La producción de este tipo de información por parte de las instituciones u organizaciones públicas utiliza herramientas que se transforman en barreras que dificultan el acceso, tanto para su reinterpretación como para su mejora.
-
-La información de tipo geográfica, tanto desde el conocimiento territorial de las y los ciudadanos como desde la producción que se realiza en las instituciones públicas constituyen un bien común digital, y por lo tanto es necesario "levantar" esas barreras haciendo estos datos de acceso libre.
-
-## Introducción
-
 Existen iniciativas de organizaciones sociales e instituciones públicas, en distintos municipios y regiones, con respecto al mapeo de producciones agroecológicas y producciones alternativas (Tuchin, 2020; Red Interregional de Nodos Agroecológicos, 2023; Agencia de Extensión Mar del Plata - INTA y col., 2022; Inta Informa 2022). Sin embargo, todas se encuentran basadas en un servicio de mapas privado, la posibilidad de agregar o modificar información es limitada, y su descarga y reutilización no se encuentra necesariamente en un formato abierto.
 
 ## Introducción
 
+La producción de este tipo de información por parte de las instituciones u organizaciones públicas utiliza herramientas que se transforman en barreras que dificultan el acceso, tanto para su reinterpretación como para su mejora.
+
+<!-- Análisis de datos del CPA -->
+
+## Objetivos
+
+La información de tipo geográfica, tanto desde el conocimiento territorial de las y los ciudadanos como desde la producción que se realiza en las instituciones públicas constituyen un bien común digital, y por lo tanto es necesario "levantar" esas barreras haciendo estos datos de acceso libre.
+
+
+
+## Objetivos
+
 A partir de una demanda respecto de la sistematización de la información relativa a la producción agroecológica en el municipio de Luján, se propuso la implementación de un proceso participativo para la construcción de criterios respecto de los datos relevantes, su sistematización y la apropiación de herramientas para la construcción de mapas colaborativos.
 
 
-## Introducción
+## Objetivos
 
 Las consecuencias ambientales y sociales de estos modelos han puesto de manifiesto la necesidad de un nuevo paradigma agroproductivo, donde la Agroecología surge como una ciencia que permite abarcar los desafíos de la sustentabilidad de sistemas esencialmente complejos (Di Ciocco y Momo, 2011; Sarandón, 2019)
 Esta propuesta de ponencia busca compartir los resultados y desafíos de esta experiencia.
@@ -98,6 +123,73 @@ Con la metodología propuesta se busca contribuir a favorecer instancias de cons
 
 
 ## Presentaciones al Congreso Pronvincial de Agroecología.
+
+### Cantidad de mapas por publicación
+
+```{r posters, eval=TRUE, echo=FALSE}
+
+#54 publicaciones con mapas
+
+cantidad_de_mapas <- tibble(mapas = datos$Posee.Mapa) %>%  count(mapas)
+cantidad_de_mapas$Cantidad <- c(1,2,3,4,5)
+
+cantidad_de_mapas$Proporción <- pasar_n_a_proporcion(cantidad_de_mapas$n)
+```
+
+```{r grafico posters}
+ggplot(cantidad_de_mapas, aes(x= Cantidad, y = Proporción ))+
+  geom_bar(stat = "identity") +
+  #labs(title = "Cantidad de mapas por publicación")+
+  theme_bw()
+
+```
+
+
+## Presentaciones al Congreso Pronvincial de Agroecología.
+
+### Cantidad de mapas según mapa base.
+
+```{r mapa base, echo=FALSE}
+google <- tibble( tipo = datos$Tipo.de.mapa.usado) %>%
+  mutate(tipo = tolower(tipo),
+         match = str_c("google", collapse = '|'),
+         key_word = str_extract_all(tipo, match)) %>%
+  select(-match)
+
+osm <- tibble(tipo = datos$Tipo.de.mapa.usado) %>% 
+  mutate(tipo = tolower(tipo),
+         match = str_c("openstreetmap", collapse = '|'),
+         key_word = str_extract_all(tipo, match)) %>%
+  select(-match)
+
+cuantos_usan_google <-  unlist(google$key_word, use.names = FALSE) %>% length()
+cuantos_usan_osm <-  unlist(osm$key_word, use.names = FALSE) %>% length()
+
+otros <- 54 - cuantos_usan_google - cuantos_usan_osm
+
+servicios <- tibble(categoria = c("Servicios de Google", "OpenStreetMap" ,"Otros"),
+                n = c(cuantos_usan_google, cuantos_usan_osm  , otros ))
+
+
+servicios$proporcion <- pasar_n_a_proporcion(servicios$n)
+```
+
+```{r grafico mapa base}
+ggplot(servicios, aes(x = "", y = proporcion, fill = categoria))+
+  geom_col(color = "black")+
+  geom_text(aes(label = categoria), position = position_stack(vjust = 0.5))+
+  coord_polar(theta = "y")+
+  #labs(title  = "Servicios Utilizados")+
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank(),
+        panel.grid = element_blank(),
+        panel.background = element_rect(fill = "#ebf2ff"),
+        plot.background = element_rect(fill = "#ebf2ff"),
+        legend.position = "none")
+```
+
+
 
 <!-- * Análisis de los pósters del CPA -->
 
