@@ -38,6 +38,56 @@ pasar_n_a_proporcion <- function(x){ #recibe $n | devuelve vector para colocar e
 
 
 
+<!-- * Análisis de los pósters del CPA -->
+
+<!--   cuántos usaron mapas -->
+<!--   de qué tipo cada uno, cuántos basados en OSM -->
+<!--   tienen atribución -->
+<!--   están disponibles abiertamente. -->
+
+
+```{r}
+#Cuantos Usaron Mapas
+#Utilizo un grafico de torta, porque para mi,
+#solo tiene utilidad cuando la diferencia es notoria.
+cantidad_de_posters_relevados <- 209 
+cantidad_de_trabajos_con_mapa <- length(datos$Posee.Mapa)
+cantidad_de_trabajos_sin_mapa <- cantidad_de_posters_relevados - cantidad_de_trabajos_con_mapa
+
+posters <- tibble(categoria = c("Con Mapa/s", "No incluyen mapa"),
+                  n = c(cantidad_de_trabajos_con_mapa,
+                        cantidad_de_trabajos_sin_mapa))
+
+posters$proporcion <- pasar_n_a_proporcion(posters$n)
+
+ggplot(posters, aes(x = "", y = proporcion, fill = categoria))+
+  geom_col(color = "black")+
+  geom_text(aes(label = categoria), position = position_stack(vjust = 0.5))+
+  coord_polar(theta = "y")+
+  labs(title  = "Trabajos Relevados")+
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank(),
+        panel.grid = element_blank(),
+        panel.background = element_rect(fill = "#ebf2ff"),
+        plot.background = element_rect(fill = "#ebf2ff"),
+        legend.position = "none")
+
+
+
+
+```
+
+
+```{r}
+#<!--   de qué tipo cada uno, cuántos basados en OSM -->
+
+
+
+```
+
+
+
 ```{r}
 
 #54 publicaciones con mapas
@@ -57,6 +107,19 @@ ggplot(cantidad_de_mapas, aes(x= cantidad, y = proporcion ))+
 
 
 ```{r}
+#<!--   de qué tipo cada uno, cuántos basados en OSM -->
+#voy a considerar todos los mapas utilizados
+nro_de_mapas_total <- tibble( tipo = datos$Posee.Mapa) %>%
+  mutate(tipo = tolower(tipo),
+         match = str_c("si", collapse = '|'),
+         key_word = str_extract_all(tipo, match)) %>%
+  select(-match)
+
+nro_de_mapas_total <-  unlist(nro_de_mapas_total$key_word, use.names = FALSE) %>% length()
+#93 si, los que poseen doble mapa deberian decir google 2 veces
+
+#view(datos)
+
 google <- tibble( tipo = datos$Tipo.de.mapa.usado) %>%
   mutate(tipo = tolower(tipo),
          match = str_c("google", collapse = '|'),
@@ -69,13 +132,24 @@ osm <- tibble(tipo = datos$Tipo.de.mapa.usado) %>%
          key_word = str_extract_all(tipo, match)) %>%
   select(-match)
 
-cuantos_usan_google <-  unlist(google$key_word, use.names = FALSE) %>% length()
-cuantos_usan_osm <-  unlist(osm$key_word, use.names = FALSE) %>% length()
+svg <- tibble(tipo = datos$Tipo.de.mapa.usado) %>% 
+  mutate(tipo = tolower(tipo),
+         match = str_c("svg", collapse = '|'),
+         key_word = str_extract_all(tipo, match)) %>%
+  select(-match)
 
-otros <- 54 - cuantos_usan_google - cuantos_usan_osm
 
-servicios <- tibble(categoria = c("Servicios de Google", "OpenStreetMap" ,"Otros"),
-                n = c(cuantos_usan_google, cuantos_usan_osm  , otros ))
+google <-  unlist(google$key_word, use.names = FALSE) %>% length()
+osm <-  unlist(osm$key_word, use.names = FALSE) %>% length()
+svg <- unlist(svg$key_word, use.names = FALSE) %>% length()
+
+otros <- nro_de_mapas_total - google - osm - svg
+
+servicios <- tibble(categoria = c("Servicios de Google",
+                                  "OpenStreetMap" ,
+                                  "Svg sin fuente",
+                                  "Otros"),
+                n = c(google,osm,svg,otros ))
 
 
 servicios$proporcion <- pasar_n_a_proporcion(servicios$n)
@@ -97,4 +171,50 @@ ggplot(servicios, aes(x = "", y = proporcion, fill = categoria))+
 ```
 
 
+```{r}
+#<!--   tienen atribución -->
+#voy a considerar todos los mapas utilizados
+con_atribucion <- tibble( tipo = datos$El.mapa.tiene.atribucion) %>%
+  mutate(tipo = tolower(tipo),
+         match = str_c("si", collapse = '|'),
+         key_word = str_extract_all(tipo, match)) %>%
+  select(-match)
 
+con_atribucion <-  unlist(con_atribucion$key_word, use.names = FALSE) %>% length()
+#21 si
+
+#view(datos)
+
+sin_atribucion <- tibble( tipo = datos$El.mapa.tiene.atribucion) %>%
+  mutate(tipo = tolower(tipo),
+         match = str_c("no", collapse = '|'),
+         key_word = str_extract_all(tipo, match)) %>%
+  select(-match)
+
+sin_atribucion <- unlist(sin_atribucion$key_word, use.names = FALSE) %>% length()
+#68 no
+
+
+
+atribucion <- tibble(categoria = c("Con atribucion",
+                                  "Sin atribucion"),
+                n = c(con_atribucion, sin_atribucion ))
+
+
+atribucion$proporcion <- pasar_n_a_proporcion(atribucion$n)
+
+ggplot(atribucion, aes(x = "", y = proporcion, fill = categoria))+
+  geom_col(color = "black")+
+  geom_text(aes(label = categoria), position = position_stack(vjust = 0.5))+
+  coord_polar(theta = "y")+
+  labs(title  = "De los que utilizaron un mapa..")+
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank(),
+        panel.grid = element_blank(),
+        panel.background = element_rect(fill = "#ebf2ff"),
+        plot.background = element_rect(fill = "#ebf2ff"),
+        legend.position = "none")
+
+
+```
