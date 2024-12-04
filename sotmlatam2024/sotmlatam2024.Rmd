@@ -45,25 +45,25 @@ pasar_n_a_proporcion <- function(x){ #recibe $n | devuelve vector para colocar e
 
 # Introducción
 
-## Introducción
+## Introducción: Agroecología
 
-\tiny
-
+\small 
 - Las consecuencias ambientales y sociales de la intervención humana sobre los ecosistemas han puesto de manifiesto la necesidad de un nuevo paradigma agroproductivo.
-- La agroecología surge como una ciencia que permite abarcar los desafíos de la sustentabilidad de sistemas esencialmente complejos [@DiCiocco2011; @Sarandon2019].
+
+<!-- - La agroecología surge como una ciencia que permite abarcar los desafíos de la sustentabilidad de sistemas esencialmente complejos [@DiCiocco2011; @Sarandon2019]. -->
 
 
 
 :::::::::::::: {.columns}
-::: {.column width=50%}
+::: {.column width=45%}
 ![](img/vistaruralsanpablo.jpg){width=90%}
-:::
-::: {.column width="2.5%"}
-\ 
+<!-- ::: -->
+<!-- ::: {.column width="1%"} -->
+<!-- \  -->
 <!-- an empty Div (with a white space), serving as
 a column separator -->
 :::
-::: {.column width="50%"}
+::: {.column width="45%"}
 ![](img/vistaurbanasanpablo.jpg){width=90%}
 :::
 ::::::::::::::
@@ -143,7 +143,12 @@ Sin embargo, la posibilidad de agregar o modificar información es limitada, y n
 
 La producción de este tipo de información por parte de las instituciones u organizaciones públicas utiliza herramientas que se transforman en barreras que dificultan el acceso, tanto para su reinterpretación como para su mejora.
 
-<!-- Análisis de datos del CPA -->
+<!-- * Análisis de los pósters del CPA -->
+
+<!--   cuántos usaron mapas -->
+<!--   de qué tipo cada uno, cuántos basados en OSM -->
+<!--   tienen atribución -->
+<!--   están disponibles abiertamente. -->
 
 
 
@@ -241,13 +246,6 @@ ggplot(servicios, aes(x = "", y = proporcion, fill = categoria))+
 
 
 
-
-<!-- * Análisis de los pósters del CPA -->
-
-<!--   cuántos usaron mapas -->
-<!--   de qué tipo cada uno, cuántos basados en OSM -->
-<!--   tienen atribución -->
-<!--   están disponibles abiertamente. -->
 
 
 <!-- * La etiqueta en OSM -->
