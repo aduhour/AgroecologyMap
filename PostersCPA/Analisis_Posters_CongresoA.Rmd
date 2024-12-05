@@ -18,8 +18,8 @@ library(dplyr)
 library(stringr)
 
 #Datos:
-datos <- read.csv2("Analisis_Postersv3csv.csv", sep = "\t")
-
+datos <- read.csv2("Analisis_Postersv4.csv", sep = "\t")
+fuente <- "Fuente: Posters del 1° Congreso de Agroecologia de BsAs"
 #Funciones 
 
 #Funcion para pasar a frecuencia, los valores absolutos.
@@ -63,8 +63,8 @@ posters$proporcion <- pasar_n_a_proporcion(posters$n)
 ggplot(posters, aes(x = "", y = proporcion, fill = categoria))+
   geom_col(color = "black")+
   geom_text(aes(label = categoria), position = position_stack(vjust = 0.5))+
-  coord_polar(theta = "y")+
-  labs(title  = "Trabajos Relevados")+
+  coord_polar(theta = "y", start = 0.9)+
+  labs(title  = "Trabajos Relevados", caption = fuente)+
   theme(axis.text = element_blank(),
         axis.ticks = element_blank(),
         axis.title = element_blank(),
@@ -93,13 +93,13 @@ ggplot(posters, aes(x = "", y = proporcion, fill = categoria))+
 #54 publicaciones con mapas
 
 cantidad_de_mapas <- tibble(mapas = datos$Posee.Mapa) %>%  count(mapas)
-cantidad_de_mapas$cantidad <- c(1,2,3,4,5)
+cantidad_de_mapas$cantidad <- c(1,2,3,4,5,6)
 
 cantidad_de_mapas$proporcion <- pasar_n_a_proporcion(cantidad_de_mapas$n)
 
 ggplot(cantidad_de_mapas, aes(x= cantidad, y = proporcion ))+
   geom_bar(stat = "identity")+
-  labs(title = "Cantidad de Mapas por publicacion")
+  labs(title = "Cantidad de Mapas por publicacion", caption = fuente)
 
 
 
@@ -116,40 +116,40 @@ nro_de_mapas_total <- tibble( tipo = datos$Posee.Mapa) %>%
   select(-match)
 
 nro_de_mapas_total <-  unlist(nro_de_mapas_total$key_word, use.names = FALSE) %>% length()
-#93 si, los que poseen doble mapa deberian decir google 2 veces
+#97 mapas
 
 #view(datos)
 
-google <- tibble( tipo = datos$Tipo.de.mapa.usado) %>%
+google <- tibble( tipo = datos$Servicio_empleado) %>%
   mutate(tipo = tolower(tipo),
          match = str_c("google", collapse = '|'),
          key_word = str_extract_all(tipo, match)) %>%
   select(-match)
 
-osm <- tibble(tipo = datos$Tipo.de.mapa.usado) %>% 
+osm <- tibble(tipo = datos$Servicio_empleado) %>% 
   mutate(tipo = tolower(tipo),
-         match = str_c("openstreetmap", collapse = '|'),
+         match = str_c("osm", collapse = '|'),
          key_word = str_extract_all(tipo, match)) %>%
   select(-match)
 
-svg <- tibble(tipo = datos$Tipo.de.mapa.usado) %>% 
+servicio_incierto <- tibble(tipo = datos$Servicio_empleado) %>% 
   mutate(tipo = tolower(tipo),
-         match = str_c("svg", collapse = '|'),
+         match = str_c("servicio_incierto", collapse = '|'),
          key_word = str_extract_all(tipo, match)) %>%
   select(-match)
 
 
 google <-  unlist(google$key_word, use.names = FALSE) %>% length()
 osm <-  unlist(osm$key_word, use.names = FALSE) %>% length()
-svg <- unlist(svg$key_word, use.names = FALSE) %>% length()
+servicio_incierto <- unlist(servicio_incierto$key_word, use.names = FALSE) %>% length()
 
-otros <- nro_de_mapas_total - google - osm - svg
+otros <- nro_de_mapas_total - google - osm - servicio_incierto
 
 servicios <- tibble(categoria = c("Servicios de Google",
-                                  "OpenStreetMap" ,
-                                  "Svg sin fuente",
+                                  "OSM" ,
+                                  "Servicio Incierto",
                                   "Otros"),
-                n = c(google,osm,svg,otros ))
+                n = c(google,osm,servicio_incierto,otros ))
 
 
 servicios$proporcion <- pasar_n_a_proporcion(servicios$n)
@@ -157,8 +157,8 @@ servicios$proporcion <- pasar_n_a_proporcion(servicios$n)
 ggplot(servicios, aes(x = "", y = proporcion, fill = categoria))+
   geom_col(color = "black")+
   geom_text(aes(label = categoria), position = position_stack(vjust = 0.5))+
-  coord_polar(theta = "y")+
-  labs(title  = "Servicios Utilizados")+
+  coord_polar(theta = "y", start = 2.1)+
+  labs(title  = "Servicios Utilizados", caption = fuente )+
   theme(axis.text = element_blank(),
         axis.ticks = element_blank(),
         axis.title = element_blank(),
@@ -206,8 +206,8 @@ atribucion$proporcion <- pasar_n_a_proporcion(atribucion$n)
 ggplot(atribucion, aes(x = "", y = proporcion, fill = categoria))+
   geom_col(color = "black")+
   geom_text(aes(label = categoria), position = position_stack(vjust = 0.5))+
-  coord_polar(theta = "y")+
-  labs(title  = "De los que utilizaron un mapa..")+
+  coord_polar(theta = "y", start = 0.8)+
+  labs(title  = "De los que utilizaron un mapa..", caption = fuente)+
   theme(axis.text = element_blank(),
         axis.ticks = element_blank(),
         axis.title = element_blank(),
