@@ -129,9 +129,7 @@ Sin embargo, la posibilidad de agregar o modificar información es limitada, y n
 ![](img/AgExgINTAMdP2022.png){height=4cm}
 
 
-## Introducción
-
-### El mapeo de producciones agroecológicas 
+## Introducción: El mapeo de producciones agroecológicas 
 
 Sin embargo, la posibilidad de agregar o modificar información es limitada, y no se encuentran necesariamente en un formato abierto 
 
@@ -152,7 +150,7 @@ La producción de este tipo de información por parte de las instituciones u org
 
 
 
-## Presentaciones al Congreso Pronvincial de Agroecología.
+## Introducción: Presentaciones al Congreso Pronvincial de Agroecología.
 
 ### Cantidad de mapas por publicación
 
@@ -174,8 +172,7 @@ ggplot(cantidad_de_mapas, aes(x= Cantidad, y = Proporción ))+
 
 ```
 
-
-## Presentaciones al Congreso Pronvincial de Agroecología.
+## Introducción: Presentaciones al Congreso Pronvincial de Agroecología.
 
 ### Cantidad de mapas según mapa base.
 
@@ -219,8 +216,6 @@ ggplot(servicios, aes(x = "", y = proporcion, fill = categoria))+
         legend.position = "none")
 ```
 
-
-
 ## Objetivos
 
 <!-- Con la metodología propuesta se busca contribuir a favorecer instancias de construcción de conocimiento, a partir del mapeo de problemas, fortaleciendo vínculos comunitarios. Del mismo modo, realizar un aporte para la construcción de políticas públicas basadas en información relevante y validada por los actores de la producción agroecológica. -->
@@ -240,10 +235,6 @@ ggplot(servicios, aes(x = "", y = proporcion, fill = categoria))+
 
 - Se propuso la implementación de un proceso participativo para la construcción de criterios respecto de los datos relevantes, su sistematización y la apropiación de herramientas para la construcción de mapas colaborativos.
 
-<!-- , teniendo en cuenta que permite el aporte de múltiples datos de tipo geográfico, su uso con diferentes aplicaciones y dispositivos, y se garantiza su disponibilidad pública mediante una licencia de uso adecuada. -->
-
-
-
 
 
 
@@ -251,6 +242,12 @@ ggplot(servicios, aes(x = "", y = proporcion, fill = categoria))+
 <!-- * La etiqueta en OSM -->
 
 # Una etiqueta en OSM
+
+- Si bien existen numerosas etiquetas para describir elementos en OSM, para realizar este proyecto hubiéramos tenido que utlizar etiquetas como "description" o agregar etiquetas a los conjuntos de cambios.
+
+Por eso se exploró la creación de una etiqueta específica. 
+
+![]()
 
 <!-- * El proyecto en Argentina -->
 
