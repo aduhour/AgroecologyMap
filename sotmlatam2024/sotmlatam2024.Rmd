@@ -14,6 +14,7 @@ bibliography: /home/andres/Documentos/Investigacion/Bibliografia/bd/library.bib
 bibliographystyle: apalike-es
 ---
 
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 
@@ -24,7 +25,7 @@ library(dplyr)
 library(stringr)
 
 #Datos:
-datos <- read.csv2("../PostersCPA/Analisis_Postersv3csv.csv", sep = "\t")
+datos <- read.csv2("../PostersCPA/Analisis_Postersv4.csv", sep = "\t")
 
 #Funciones 
 
@@ -38,16 +39,14 @@ pasar_n_a_proporcion <- function(x){ #recibe $n | devuelve vector para colocar e
   }
   return(x)
 }
-
-
 ```
-
 
 # Introducción
 
 ## Introducción: Agroecología
 
 \small 
+
 - Las consecuencias ambientales y sociales de la intervención humana sobre los ecosistemas han puesto de manifiesto la necesidad de un nuevo paradigma agroproductivo.
 
 <!-- - La agroecología surge como una ciencia que permite abarcar los desafíos de la sustentabilidad de sistemas esencialmente complejos [@DiCiocco2011; @Sarandon2019]. -->
@@ -108,34 +107,33 @@ La información relativa no necesariamente está disponible abiertamente y tampo
 
 ## Introducción: El mapeo de producciones agroecológicas 
 
-Existen iniciativas de organizaciones sociales e instituciones públicas, en distintos municipios y regiones:
+<!-- Existen iniciativas de organizaciones sociales e instituciones públicas, en distintos municipios y regiones: -->
 
 <!-- s (Tuchin, 2020; Red Interregional de Nodos Agroecológicos, 2023; Agencia de Extensión Mar del Plata - INTA y col., 2022; Inta Informa 2022). Sin embargo, todas se encuentran basadas en un servicio de mapas privado, la posibilidad de agregar o modificar información es limitada, y su descarga y reutilización no se encuentra necesariamente en un formato abierto. -->
 
-![](img/Tuchin2020-redaccioncomar.png){height=4cm}
+\centering
+
+![](img/Tuchin2020-redaccioncomar.png){height=8cm}
 
 ## Introducción: El mapeo de producciones agroecológicas 
 
-Existen iniciativas de organizaciones sociales e instituciones públicas, en distintos municipios y regiones:
 
-![](img/Intainforma2022.png){height=4cm}
+![](img/Intainforma2022.png){height=7cm}
 
 ## Introducción: El mapeo de producciones agroecológicas 
 
-Sin embargo, la posibilidad de agregar o modificar información es limitada, y no se encuentran necesariamente en un formato abierto 
+
 
 <!-- s (Tuchin, 2020; Red Interregional de Nodos Agroecológicos, 2023; Agencia de Extensión Mar del Plata - INTA y col., 2022; Inta Informa 2022). Sin embargo, todas se encuentran basadas en un servicio de mapas privado, la posibilidad de agregar o modificar información es limitada, y su descarga y reutilización no se encuentra necesariamente en un formato abierto. -->
 
-![](img/AgExgINTAMdP2022.png){height=4cm}
+![](img/AgExgINTAMdP2022.png){height=7cm}
 
 
 ## Introducción: El mapeo de producciones agroecológicas 
 
-Sin embargo, la posibilidad de agregar o modificar información es limitada, y no se encuentran necesariamente en un formato abierto 
-
 <!-- s (Tuchin, 2020; Red Interregional de Nodos Agroecológicos, 2023; Agencia de Extensión Mar del Plata - INTA y col., 2022; Inta Informa 2022). Sin embargo, todas se encuentran basadas en un servicio de mapas privado, la posibilidad de agregar o modificar información es limitada, y su descarga y reutilización no se encuentra necesariamente en un formato abierto. -->
 
-![](img/IntaInforma.jpg){height=4cm}
+![](img/IntaInforma.jpg){height=7cm}
 
 ## Introducción
 
@@ -148,9 +146,11 @@ La producción de este tipo de información por parte de las instituciones u org
 <!--   tienen atribución -->
 <!--   están disponibles abiertamente. -->
 
+## Introducción: Presentaciones al Congreso Provincial de Agroecología.
 
+![Primer Congreso Provincial de Agroecología de la Provincia de Buenos Aires](img/sarandoncpa.JPG)
 
-## Introducción: Presentaciones al Congreso Pronvincial de Agroecología.
+## Introducción: Presentaciones al Congreso Provincial de Agroecología.
 
 ### Cantidad de mapas por publicación
 
@@ -159,20 +159,20 @@ La producción de este tipo de información por parte de las instituciones u org
 #54 publicaciones con mapas
 
 cantidad_de_mapas <- tibble(mapas = datos$Posee.Mapa) %>%  count(mapas)
-cantidad_de_mapas$Cantidad <- c(1,2,3,4,5)
+cantidad_de_mapas$Cantidad <- c(1,2,3,4,5,6)
 
 cantidad_de_mapas$Proporción <- pasar_n_a_proporcion(cantidad_de_mapas$n)
 ```
 
 ```{r grafico-posters, fig.width = 3.5,fig.height=2.5,fig.align='center'}
+
 ggplot(cantidad_de_mapas, aes(x= Cantidad, y = Proporción ))+
   geom_bar(stat = "identity") +
   labs(xlab="Cantidad de mapas")+
   theme_bw()
-
 ```
 
-## Introducción: Presentaciones al Congreso Pronvincial de Agroecología.
+## Introducción: Presentaciones al Congreso Provincial de Agroecología.
 
 ### Cantidad de mapas según mapa base.
 
@@ -201,7 +201,7 @@ servicios <- tibble(categoria = c("Servicios de Google", "OpenStreetMap" ,"Otros
 servicios$proporcion <- pasar_n_a_proporcion(servicios$n)
 ```
 
-```{r grafico-mapa-base}
+```{r grafico-mapa-base, fig.width = 3.5,fig.align='center}
 ggplot(servicios, aes(x = "", y = proporcion, fill = categoria))+
   geom_col(color = "black")+
   geom_text(aes(label = categoria), position = position_stack(vjust = 0.5))+
@@ -220,7 +220,7 @@ ggplot(servicios, aes(x = "", y = proporcion, fill = categoria))+
 
 <!-- Con la metodología propuesta se busca contribuir a favorecer instancias de construcción de conocimiento, a partir del mapeo de problemas, fortaleciendo vínculos comunitarios. Del mismo modo, realizar un aporte para la construcción de políticas públicas basadas en información relevante y validada por los actores de la producción agroecológica. -->
 
-- Favorecer instancias de construcción de conocimiento, a partir del mapeo de problemas
+- Favorecer instancias de construcción de conocimiento.
 
 - Fortalecer vínculos comunitarios.
 
@@ -231,23 +231,63 @@ ggplot(servicios, aes(x = "", y = proporcion, fill = categoria))+
 
 ## Metodología
 
-- Se propuso la construcción de una cartografía colaborativa de los emprendimientos agroecológicos del partido, y de su entorno ecológico y ambiental utilizando OpenStreetMap.
+![Encuentro con productores y productoras, la universidad y la municipalidad](img/construcciondecriterios.jpg)
 
-- Se propuso la implementación de un proceso participativo para la construcción de criterios respecto de los datos relevantes, su sistematización y la apropiación de herramientas para la construcción de mapas colaborativos.
+<!-- - Se propuso la construcción de una cartografía colaborativa de los emprendimientos agroecológicos del partido, y de su entorno ecológico y ambiental utilizando OpenStreetMap. -->
 
-
-
-
+<!-- - Se propuso la implementación de un proceso participativo para la construcción de criterios respecto de los datos relevantes, su sistematización y la apropiación de herramientas para la construcción de mapas colaborativos. -->
 
 <!-- * La etiqueta en OSM -->
 
 # Una etiqueta en OSM
 
-- Si bien existen numerosas etiquetas para describir elementos en OSM, para realizar este proyecto hubiéramos tenido que utlizar etiquetas como "description" o agregar etiquetas a los conjuntos de cambios.
+## Propuesta de la etiqueta $agroecology = *$
 
-Por eso se exploró la creación de una etiqueta específica. 
+En OSM no existía una etiqueta específica para denominar los sitios de dedicados a la agroecología, ya sean comercios o específicamente productores y establecimientos productivos.
 
-![]()
+
+
+## Propuesta de la etiqueta $agroecology = *$
+
+Por otro lado, una etiqueta como $organic = *$ se utiliza para describir _si una tienda o restaurante ofrece productos orgánicos_ 
+
+![](img/organic.png)
+
+## Propuesta de la etiqueta $agroecology = *$
+
+
+En muchos lugares del mundo la certificación orgánica conlleva un costo financiero importante para las familias productoras. 
+
+Como resultado, las comunidades de productores están desarrollando sus propios sellos y sistemas participativos de garantías (SPG) para certificar sus prácticas agroecológicas [@Lemeilleur2020; @Fernandez2018] .
+
+<!-- Por eso se exploró la creación de una etiqueta específica.  -->
+
+## Propuesta de la etiqueta $agroecology = *$
+
+
+![](img/proposal-agroecology.png)
+
+## Propuesta de la etiqueta $agroecology = *$
+
+
+![](img/proposalforum.png)
+
+## Propuesta de la etiqueta $agroecology = *$
+
+![](img/claveaprobada.png)
+
+## Propuesta de la etiqueta $agroecology = *$
+
+### ¿Cómo mapear?
+
+1. En el caso más simple: Si el lugar se describe explícitamente con los términos "agroecológico" o "agroecología", agregar la etiqueta agroecology=yes al elemento a mapear.
+
+![](../../img/despensaagroecológica.jpg)
+    <!-- En forma alternativa, para sitios que cuentan con una certificación de sus prácticas agroecológicas, agregar la etiquetaagroecology=certified al elemento a mapear. -->
+    <!--     Si el método de certificación está descripto en la fuente de datos utilizada para cartografiar el sitio, se puede agregar la etiqueta y sufijo agroecology:certification=* con los siguientes valores: -->
+    <!--         agroecology:certification=third_party, para el caso de que el sello se haya obtenido a partir de empresas de certificación o de organismos públicos dedicados a evaluar y certificar prácticas agroecológicas. -->
+    <!--         agroecology:certification=participatory, para el caso de que el sello se haya obtenido de un sistema participativo de garantías. -->
+    <!--     Si se conoce la organización que provee el sello o certificación, puede agregarse la etiqueta agroecology:operator=*. -->
 
 <!-- * El proyecto en Argentina -->
 
@@ -256,3 +296,7 @@ Por eso se exploró la creación de una etiqueta específica.
 <!-- * El mapa de luján -->
 
 
+
+# Referencias
+
+## Referencias{.allowframebreaks}
