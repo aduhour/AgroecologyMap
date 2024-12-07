@@ -23,6 +23,9 @@ library(tidyverse)
 library(tibble)
 library(dplyr)
 library(stringr)
+library(osmdata)
+library(sf)
+library(tmap)
 
 #Datos:
 datos <- read.csv2("../PostersCPA/Analisis_Postersv4.csv", sep = "\t")
@@ -41,13 +44,11 @@ pasar_n_a_proporcion <- function(x){ #recibe $n | devuelve vector para colocar e
 }
 ```
 
-# Introducción
+## Agroecología: Nuevo paradigma agroproductivo
 
-## Introducción: Agroecología
+<!-- \small  -->
 
-\small 
-
-- Las consecuencias ambientales y sociales de la intervención humana sobre los ecosistemas han puesto de manifiesto la necesidad de un nuevo paradigma agroproductivo.
+<!-- Las consecuencias ambientales y sociales de la intervención humana sobre los ecosistemas han puesto de manifiesto la necesidad de un nuevo paradigma agroproductivo. -->
 
 <!-- - La agroecología surge como una ciencia que permite abarcar los desafíos de la sustentabilidad de sistemas esencialmente complejos [@DiCiocco2011; @Sarandon2019]. -->
 
@@ -55,7 +56,7 @@ pasar_n_a_proporcion <- function(x){ #recibe $n | devuelve vector para colocar e
 
 :::::::::::::: {.columns}
 ::: {.column width=45%}
-![](img/vistaruralsanpablo.jpg){width=90%}
+![](img/vistaruralsanpablo.jpg)
 <!-- ::: -->
 <!-- ::: {.column width="1%"} -->
 <!-- \  -->
@@ -63,14 +64,14 @@ pasar_n_a_proporcion <- function(x){ #recibe $n | devuelve vector para colocar e
 a column separator -->
 :::
 ::: {.column width="45%"}
-![](img/vistaurbanasanpablo.jpg){width=90%}
+![](img/vistaurbanasanpablo.jpg)
 :::
 ::::::::::::::
 
 
-## Introducción
+## Bienes comunes
 
-La información de tipo geográfica, tanto desde el conocimiento territorial de las y los ciudadanos como desde la producción que se realiza en las instituciones públicas constituyen **un bien común digital**, y por lo tanto es necesario "levantar" esas barreras haciendo estos datos de acceso libre [@Dufeal2017].
+La información de tipo geográfica, tanto desde el conocimiento territorial de las y los ciudadanos como desde la producción que se realiza en las instituciones públicas constituyen **un bien común digital**, y por lo tanto es necesario "levantar" las barreras que dificultan su acceso haciendo estos datos de acceso libre [@Dufeal2017].
 
 
 
@@ -82,30 +83,30 @@ La información de tipo geográfica, tanto desde el conocimiento territorial de 
 
 <!-- En conjunto con ello, se han sancionado normativas que limitan el uso de agroquímicos en diferentes jurisdicciones y se han iniciado procesos de reconversión de las producciones existentes.  -->
 
-## Introducción
+## Bienes comunes
 
 Este proceso de promoción y fortalecimiento de planteos productivos novedosos se enmarca en un entorno sociocultural y ambiental de disputa con otros modelos productivos y del uso y apropiación de los recursos naturales y también de uso y apropiación de los saberes y conocimientos, en tanto bienes comunes.
 
 
-## Introducción
+## Participación de la comunidad
 
 El conocimiento y análisis de estos procesos debe involucrar a sus actores:
 
 -  productores, consumidores, sus organizaciones, en interacción con instituciones estatales específicas del sector agropecuario y las vinculadas a la educación y la investigación.
 
-## Introducción
+## Promoción de modelos alternativos
 
-La promoción de modelos productivos alternativos debe ir unida a una apertura del acceso a la información 
+La promoción de modelos productivos alternativos debe ir unida a una apertura del acceso a la información.
 
 <!-- local -->
 
 <!-- de tipo geográfica, que  -->
 
-La información relativa no necesariamente está disponible abiertamente y tampoco es ajena a procesos de cercamiento y privatización.
+La información relacionada no necesariamente está disponible abiertamente y tampoco es ajena a procesos de cercamiento y privatización.
 
 <!-- * Antecedentes en general del uso de mapas para la agroecología. tomar del proyecto de extensión -->
 
-## Introducción: El mapeo de producciones agroecológicas 
+## El mapeo de producciones agroecológicas 
 
 <!-- Existen iniciativas de organizaciones sociales e instituciones públicas, en distintos municipios y regiones: -->
 
@@ -115,12 +116,12 @@ La información relativa no necesariamente está disponible abiertamente y tampo
 
 ![](img/Tuchin2020-redaccioncomar.png){height=8cm}
 
-## Introducción: El mapeo de producciones agroecológicas 
+## El mapeo de producciones agroecológicas 
 
 
 ![](img/Intainforma2022.png){height=7cm}
 
-## Introducción: El mapeo de producciones agroecológicas 
+## El mapeo de producciones agroecológicas 
 
 
 
@@ -129,15 +130,13 @@ La información relativa no necesariamente está disponible abiertamente y tampo
 ![](img/AgExgINTAMdP2022.png){height=7cm}
 
 
-## Introducción: El mapeo de producciones agroecológicas 
+## El mapeo de producciones agroecológicas 
 
 <!-- s (Tuchin, 2020; Red Interregional de Nodos Agroecológicos, 2023; Agencia de Extensión Mar del Plata - INTA y col., 2022; Inta Informa 2022). Sin embargo, todas se encuentran basadas en un servicio de mapas privado, la posibilidad de agregar o modificar información es limitada, y su descarga y reutilización no se encuentra necesariamente en un formato abierto. -->
 
 ![](img/IntaInforma.jpg){height=7cm}
 
-## Introducción
 
-La producción de este tipo de información por parte de las instituciones u organizaciones públicas utiliza herramientas que se transforman en barreras que dificultan el acceso, tanto para su reinterpretación como para su mejora.
 
 <!-- * Análisis de los pósters del CPA -->
 
@@ -146,11 +145,15 @@ La producción de este tipo de información por parte de las instituciones u org
 <!--   tienen atribución -->
 <!--   están disponibles abiertamente. -->
 
-## Introducción: Presentaciones al Congreso Provincial de Agroecología.
+## Congreso Provincial de Agroecología.
 
-![Primer Congreso Provincial de Agroecología de la Provincia de Buenos Aires](img/sarandoncpa.JPG)
+![Primer Congreso Provincial de Agroecología de la Provincia de Buenos Aires](img/sarandoncpa.JPG){height=6cm}
 
-## Introducción: Presentaciones al Congreso Provincial de Agroecología.
+## Congreso Provincial de Agroecología.
+
+![Pósters presentados al congreso](img/posterscpa.JPG)
+
+## Congreso Provincial de Agroecología.
 
 ### Cantidad de mapas por publicación
 
@@ -172,7 +175,7 @@ ggplot(cantidad_de_mapas, aes(x= Cantidad, y = Proporción ))+
   theme_bw()
 ```
 
-## Introducción: Presentaciones al Congreso Provincial de Agroecología.
+## Presentaciones al Congreso Provincial de Agroecología.
 
 ### Cantidad de mapas según mapa base.
 
@@ -201,7 +204,7 @@ servicios <- tibble(categoria = c("Servicios de Google", "OpenStreetMap" ,"Otros
 servicios$proporcion <- pasar_n_a_proporcion(servicios$n)
 ```
 
-```{r grafico-mapa-base, fig.width = 3.5,fig.align='center}
+```{r grafico-mapa-base, fig.width = 3.5,fig.align='center'}
 ggplot(servicios, aes(x = "", y = proporcion, fill = categoria))+
   geom_col(color = "black")+
   geom_text(aes(label = categoria), position = position_stack(vjust = 0.5))+
@@ -217,6 +220,8 @@ ggplot(servicios, aes(x = "", y = proporcion, fill = categoria))+
 ```
 
 ## Objetivos
+
+La producción de este tipo de información por parte de las instituciones u organizaciones públicas utiliza herramientas que se transforman en barreras que dificultan el acceso, tanto para su reinterpretación como para su mejora.
 
 <!-- Con la metodología propuesta se busca contribuir a favorecer instancias de construcción de conocimiento, a partir del mapeo de problemas, fortaleciendo vínculos comunitarios. Del mismo modo, realizar un aporte para la construcción de políticas públicas basadas en información relevante y validada por los actores de la producción agroecológica. -->
 
@@ -265,7 +270,7 @@ Como resultado, las comunidades de productores están desarrollando sus propios 
 ## Propuesta de la etiqueta $agroecology = *$
 
 
-![](img/proposal-agroecology.png)
+![](img/proposal-agroecology.png){height=6cm}
 
 ## Propuesta de la etiqueta $agroecology = *$
 
@@ -274,26 +279,66 @@ Como resultado, las comunidades de productores están desarrollando sus propios 
 
 ## Propuesta de la etiqueta $agroecology = *$
 
-![](img/claveaprobada.png)
+![](img/claveaprobada.png){height=6cm}
 
 ## Propuesta de la etiqueta $agroecology = *$
 
 ### ¿Cómo mapear?
 
-1. En el caso más simple: Si el lugar se describe explícitamente con los términos "agroecológico" o "agroecología", agregar la etiqueta agroecology=yes al elemento a mapear.
+1. Si el lugar se describe explícitamente con los términos "agroecológico" o "agroecología", agregar la etiqueta _agroecology=yes_.
 
-![](../../img/despensaagroecológica.jpg)
-    <!-- En forma alternativa, para sitios que cuentan con una certificación de sus prácticas agroecológicas, agregar la etiquetaagroecology=certified al elemento a mapear. -->
-    <!--     Si el método de certificación está descripto en la fuente de datos utilizada para cartografiar el sitio, se puede agregar la etiqueta y sufijo agroecology:certification=* con los siguientes valores: -->
-    <!--         agroecology:certification=third_party, para el caso de que el sello se haya obtenido a partir de empresas de certificación o de organismos públicos dedicados a evaluar y certificar prácticas agroecológicas. -->
-    <!--         agroecology:certification=participatory, para el caso de que el sello se haya obtenido de un sistema participativo de garantías. -->
-    <!--     Si se conoce la organización que provee el sello o certificación, puede agregarse la etiqueta agroecology:operator=*. -->
+![](../../img/despensaagroecológica.jpg){height=6cm}
+
+## Propuesta de la etiqueta $agroecology = *$
+
+### ¿Cómo mapear?
+
+2. Si cuenta con una certificación de sus prácticas agroecológicas, agregar la etiqueta _agroecology=certified_
+
+![](../../img/ekongkar.png){height=5cm}
 
 <!-- * El proyecto en Argentina -->
 
 
 
 <!-- * El mapa de luján -->
+
+## Mapa de Luján
+
+```{r mapa, fig.height=6}
+
+area <- "Partido de Luján"
+area <- getbb(area, format_out = "sf_polygon")
+bbox <- st_bbox(area)
+area_opq <- opq(bbox,timeout = 50)
+
+agroecology <- add_osm_feature(area_opq,key = "agroecology") |>
+  osmdata_sf()
+
+                     # subset(agroecology$osm_polygons, 
+                     #        subset = !is.na(agroecology),  
+                     #        select = c("agroecology","place","shop"))
+
+
+almacen <- agroecology$osm_points
+almacen <- subset(almacen, subset = almacen$shop == "convenience")
+
+prod <- agroecology$osm_points
+prod <- subset(prod, subset = prod$place == "farm")
+
+feria = agroecology$osm_points
+feria = subset(feria, subset = feria$amenity == "marketplace")
+
+map <- tm_shape(area) + tm_borders() +
+tm_shape(almacen) + tm_symbols(fill = "black",shape = 1)+
+  tm_shape(feria) + tm_symbols(fill = "blue", shape = 2)+
+  tm_shape(prod) + tm_symbols(fill = "green")+
+  tm_basemap() + tm_scalebar()
+map
+```
+## Mapa de Luján
+
+
 
 
 
