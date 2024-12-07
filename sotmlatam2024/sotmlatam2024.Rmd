@@ -26,6 +26,7 @@ library(stringr)
 
 #Datos:
 datos <- read.csv2("../PostersCPA/Analisis_Postersv4.csv", sep = "\t")
+fuente <- "Fuente: Posters que incluyeron datos georreferenciados del 1° Congreso de Agroecologia de BsAs"
 
 #Funciones 
 
@@ -155,13 +156,14 @@ La producción de este tipo de información por parte de las instituciones u org
 ### Cantidad de mapas por publicación
 
 ```{r posters, eval=TRUE, echo=FALSE}
-
 #54 publicaciones con mapas
 
 cantidad_de_mapas <- tibble(mapas = datos$Posee.Mapa) %>%  count(mapas)
 cantidad_de_mapas$Cantidad <- c(1,2,3,4,5,6)
 
 cantidad_de_mapas$Proporción <- pasar_n_a_proporcion(cantidad_de_mapas$n)
+
+
 ```
 
 ```{r grafico-posters, fig.width = 3.5,fig.height=2.5,fig.align='center'}
@@ -177,36 +179,69 @@ ggplot(cantidad_de_mapas, aes(x= Cantidad, y = Proporción ))+
 ### Cantidad de mapas según mapa base.
 
 ```{r mapa-base, echo=FALSE}
-google <- tibble( tipo = datos$Tipo.de.mapa.usado) %>%
+#<!--   de qué tipo cada uno, cuántos basados en OSM -->
+#voy a considerar todos los mapas utilizados
+nro_de_mapas_total <- tibble( tipo = datos$Posee.Mapa) %>%
+  mutate(tipo = tolower(tipo),
+         match = str_c("si", collapse = '|'),
+         key_word = str_extract_all(tipo, match)) %>%
+  select(-match)
+
+nro_de_mapas_total <-  unlist(nro_de_mapas_total$key_word, use.names = FALSE) %>% length()
+#97 mapas
+
+#view(datos)
+
+google <- tibble( tipo = datos$Servicio_empleado) %>%
   mutate(tipo = tolower(tipo),
          match = str_c("google", collapse = '|'),
          key_word = str_extract_all(tipo, match)) %>%
   select(-match)
 
-osm <- tibble(tipo = datos$Tipo.de.mapa.usado) %>% 
+osm <- tibble(tipo = datos$Servicio_empleado) %>% 
   mutate(tipo = tolower(tipo),
-         match = str_c("openstreetmap", collapse = '|'),
+         match = str_c("osm", collapse = '|'),
          key_word = str_extract_all(tipo, match)) %>%
   select(-match)
 
-cuantos_usan_google <-  unlist(google$key_word, use.names = FALSE) %>% length()
-cuantos_usan_osm <-  unlist(osm$key_word, use.names = FALSE) %>% length()
+servicio_incierto <- tibble(tipo = datos$Servicio_empleado) %>% 
+  mutate(tipo = tolower(tipo),
+         match = str_c("servicio_incierto", collapse = '|'),
+         key_word = str_extract_all(tipo, match)) %>%
+  select(-match)
 
-otros <- 54 - cuantos_usan_google - cuantos_usan_osm
 
-servicios <- tibble(categoria = c("Servicios de Google", "OpenStreetMap" ,"Otros"),
-                n = c(cuantos_usan_google, cuantos_usan_osm  , otros ))
+google <-  unlist(google$key_word, use.names = FALSE) %>% length()
+osm <-  unlist(osm$key_word, use.names = FALSE) %>% length()
+servicio_incierto <- unlist(servicio_incierto$key_word, use.names = FALSE) %>% length()
+
+otros <- nro_de_mapas_total - google - osm - servicio_incierto
+
+servicios <- tibble(categoria = c("Servicios de Google",
+                                  "OpenStreetMap" ,
+                                  "Servicio Incierto",
+                                  "Otros"),
+                n = c(google,osm,servicio_incierto,otros ))
 
 
 servicios$proporcion <- pasar_n_a_proporcion(servicios$n)
+#> servicios$proporcion
+#[1] 0.41237113 0.06185567 0.48453608 0.04123711
+servicios$categoria <-  c("41.2%\nServicios de Google",
+                                  "OpenStreetMap" ,
+                                  "48.4%\nServicio Incierto",
+                                  "Otros")
+
 ```
 
 ```{r grafico-mapa-base, fig.width = 3.5,fig.align='center}
+
+
 ggplot(servicios, aes(x = "", y = proporcion, fill = categoria))+
   geom_col(color = "black")+
   geom_text(aes(label = categoria), position = position_stack(vjust = 0.5))+
-  coord_polar(theta = "y")+
-  #labs(title  = "Servicios Utilizados")+
+  coord_polar(theta = "y", start = 4.2)+
+  #labs(title  = "Servicios Utilizados", caption = fuente )+
   theme(axis.text = element_blank(),
         axis.ticks = element_blank(),
         axis.title = element_blank(),
@@ -214,6 +249,7 @@ ggplot(servicios, aes(x = "", y = proporcion, fill = categoria))+
         panel.background = element_rect(fill = "#ebf2ff"),
         plot.background = element_rect(fill = "#ebf2ff"),
         legend.position = "none")
+
 ```
 
 ## Objetivos

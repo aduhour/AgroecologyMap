@@ -19,7 +19,7 @@ library(stringr)
 
 #Datos:
 datos <- read.csv2("Analisis_Postersv4.csv", sep = "\t")
-fuente <- "Fuente: Posters del 1° Congreso de Agroecologia de BsAs"
+fuente <- "Fuente: Posters que incluyeron datos georreferenciados del 1° Congreso de Agroecologia de BsAs"
 #Funciones 
 
 #Funcion para pasar a frecuencia, los valores absolutos.
@@ -71,10 +71,12 @@ posters <- tibble(categoria = c("Con Mapa/s", "No incluyen mapa"),
 
 posters$proporcion <- pasar_n_a_proporcion(posters$n)
 
+posters$categoria <- c("25.8%\nCon Mapa/s", "74.1%\nNo incluyen mapa")
+
 ggplot(posters, aes(x = "", y = proporcion, fill = categoria))+
   geom_col(color = "black")+
   geom_text(aes(label = categoria), position = position_stack(vjust = 0.5))+
-  coord_polar(theta = "y", start = 0.9)+
+  coord_polar(theta = "y", start = 4)+
   labs(title  = "Trabajos Relevados", caption = fuente)+
   theme(axis.text = element_blank(),
         axis.ticks = element_blank(),
@@ -99,21 +101,33 @@ Los que utilizaron un mapa, nos comparten la ubicacion en la que se llevo a cabo
 #54 publicaciones con mapas
 
 cantidad_de_mapas <- tibble(mapas = datos$Posee.Mapa) %>%  count(mapas)
-cantidad_de_mapas$cantidad <- c(1,2,3,4,5,6)
+cantidad_de_mapas$Cantidad <- c(1,2,3,4,5,6)
 
-cantidad_de_mapas$proporcion <- pasar_n_a_proporcion(cantidad_de_mapas$n)
+cantidad_de_mapas$Proporción <- pasar_n_a_proporcion(cantidad_de_mapas$n)
 
-ggplot(cantidad_de_mapas, aes(x= cantidad, y = proporcion ))+
+ggplot(cantidad_de_mapas, aes(x= Cantidad, y = Proporción, fill = Cantidad ))+
   geom_bar(stat = "identity")+
-  labs(title = "Cantidad de Mapas por publicacion", caption = fuente)
+  labs(title = "Cantidad de Mapas por publicacion", caption = fuente)+
+  theme(legend.position = "none")
 
 
 
 ```
+
+
 # La Atribucion
 
 
-La atribución de los datos de un mapa no solo es una cuestión de ética, sino también de responsabilidad y transparencia. Reconocer la fuente de los datos garantiza la credibilidad de la información y permite a otros usuarios verificar su validez. Además, es una forma de respetar el trabajo de quienes recolectaron y procesaron esa información, promoviendo una cultura de colaboración y confianza en el uso de datos geoespaciales. Sin la atribución adecuada, corremos el riesgo de malinterpretar o descontextualizar los datos, lo que puede llevar a decisiones erróneas o a la perpetuación de información incorrecta.
+La atribución de los datos de un mapa no solo es una cuestión de ética, sino también de responsabilidad y transparencia. 
+
+
+Reconocer la fuente de los datos garantiza la credibilidad de la información y permite a otros usuarios verificar su validez. 
+
+
+Además, es una forma de respetar el trabajo de quienes recolectaron y procesaron esa información, promoviendo una cultura de colaboración y confianza en el uso de datos geoespaciales. 
+
+Sin la atribución adecuada, corremos el riesgo de malinterpretar o descontextualizar los datos, lo que puede llevar a decisiones erróneas o a la perpetuación de información incorrecta.
+
 
 
 ```{r echo=FALSE}
@@ -139,19 +153,26 @@ sin_atribucion <- tibble( tipo = datos$El.mapa.tiene.atribucion) %>%
 sin_atribucion <- unlist(sin_atribucion$key_word, use.names = FALSE) %>% length()
 #68 no
 
+#no necesitan porque uno es un croquis elaborado, y el otro tambien
+#es un croquis, pero armado entre varios personas.
+no_necesitan <- 2
 
 
-atribucion <- tibble(categoria = c("Con atribucion",
-                                  "Sin atribucion"),
-                n = c(con_atribucion, sin_atribucion ))
+atribucion <- tibble(categoria = c("Con\natribucion",
+                                  "Sin atribucion",
+                                  "No necesitan"),
+                n = c(con_atribucion, sin_atribucion, no_necesitan ))
 
 
 atribucion$proporcion <- pasar_n_a_proporcion(atribucion$n)
+# > atribucion$proporcion
+# [1] 0.24489796 0.73469388 0.02040816
+
 
 ggplot(atribucion, aes(x = "", y = proporcion, fill = categoria))+
   geom_col(color = "black")+
   geom_text(aes(label = categoria), position = position_stack(vjust = 0.5))+
-  coord_polar(theta = "y", start = 0.8)+
+  coord_polar(theta = "y", start = 0)+
   labs(title  = "De los que utilizaron un mapa..", caption = fuente)+
   theme(axis.text = element_blank(),
         axis.ticks = element_blank(),
@@ -169,6 +190,8 @@ ggplot(atribucion, aes(x = "", y = proporcion, fill = categoria))+
 Sin tener la atribucion correspondiente, uno puede dilusidar el mapa es por los elementos que lo componen, como por ejemplo las ciudades trampa (Agloe) , las calles trampa (Calles pavimentadas sobre un rio), o mas reciente, el mapa base utilizado en los navegadores web, aplicaciones y dispositivos gps.
 
 En esto, trate de dilusidar la fuente, pero en algunos, la tranformacion de los datos hace lo imposible, en otros por fuera del mapa incluyen los servicios utilizados.
+
+
 
 ```{r echo=FALSE}
 #<!--   de qué tipo cada uno, cuántos basados en OSM -->
@@ -217,11 +240,18 @@ servicios <- tibble(categoria = c("Servicios de Google",
 
 
 servicios$proporcion <- pasar_n_a_proporcion(servicios$n)
+#> servicios$proporcion
+#[1] 0.41237113 0.06185567 0.48453608 0.04123711
+servicios$categoria <-  c("41.2%\nServicios de Google",
+                                  "OSM" ,
+                                  "48.4%\nServicio Incierto",
+                                  "Otros")
+
 
 ggplot(servicios, aes(x = "", y = proporcion, fill = categoria))+
   geom_col(color = "black")+
   geom_text(aes(label = categoria), position = position_stack(vjust = 0.5))+
-  coord_polar(theta = "y", start = 2.1)+
+  coord_polar(theta = "y", start = 4.2)+
   labs(title  = "Servicios Utilizados", caption = fuente )+
   theme(axis.text = element_blank(),
         axis.ticks = element_blank(),
