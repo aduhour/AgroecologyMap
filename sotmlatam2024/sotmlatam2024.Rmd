@@ -26,7 +26,7 @@ library(stringr)
 library(osmdata)
 library(sf)
 library(tmap)
-
+library(fontawesome)
 #Datos:
 datos <- read.csv2("../PostersCPA/Analisis_Postersv4.csv", sep = "\t")
 
@@ -92,7 +92,7 @@ Este proceso de promoción y fortalecimiento de planteos productivos novedosos s
 
 El conocimiento y análisis de estos procesos debe involucrar a sus actores:
 
--  productores, consumidores, sus organizaciones, en interacción con instituciones estatales específicas del sector agropecuario y las vinculadas a la educación y la investigación.
+productores, consumidores, sus organizaciones, en interacción con instituciones estatales específicas del sector agropecuario y las vinculadas a la educación y la investigación.
 
 ## Promoción de modelos alternativos
 
@@ -127,14 +127,14 @@ La información relacionada no necesariamente está disponible abiertamente y ta
 
 <!-- s (Tuchin, 2020; Red Interregional de Nodos Agroecológicos, 2023; Agencia de Extensión Mar del Plata - INTA y col., 2022; Inta Informa 2022). Sin embargo, todas se encuentran basadas en un servicio de mapas privado, la posibilidad de agregar o modificar información es limitada, y su descarga y reutilización no se encuentra necesariamente en un formato abierto. -->
 
-![](img/AgExgINTAMdP2022.png){height=7cm}
+![](img/AgExgINTAMdP2022.png){height=6cm}
 
 
 ## El mapeo de producciones agroecológicas 
 
 <!-- s (Tuchin, 2020; Red Interregional de Nodos Agroecológicos, 2023; Agencia de Extensión Mar del Plata - INTA y col., 2022; Inta Informa 2022). Sin embargo, todas se encuentran basadas en un servicio de mapas privado, la posibilidad de agregar o modificar información es limitada, y su descarga y reutilización no se encuentra necesariamente en un formato abierto. -->
 
-![](img/IntaInforma.jpg){height=7cm}
+![](img/IntaInforma.jpg){height=6cm}
 
 
 
@@ -151,7 +151,7 @@ La información relacionada no necesariamente está disponible abiertamente y ta
 
 ## Congreso Provincial de Agroecología.
 
-![Pósters presentados al congreso](img/posterscpa.JPG)
+![Pósters presentados al congreso](img/posterscpa.JPG){height=6cm}
 
 ## Congreso Provincial de Agroecología.
 
@@ -307,39 +307,60 @@ Como resultado, las comunidades de productores están desarrollando sus propios 
 
 ```{r mapa, fig.height=6}
 
-area <- "Partido de Luján"
-area <- getbb(area, format_out = "sf_polygon")
-bbox <- st_bbox(area)
-area_opq <- opq(bbox,timeout = 50)
+# area <- "Partido de Luján"
+# area <- getbb(area, format_out = "sf_polygon")
+# bbox <- st_bbox(area)
+# area_opq <- opq(bbox,timeout = 50)
+# 
+# agroecology <- add_osm_feature(area_opq,key = "agroecology") |>
+#   osmdata_sf()
+# 
+#                      # subset(agroecology$osm_polygons, 
+#                      #        subset = !is.na(agroecology),  
+#                      #        select = c("agroecology","place","shop"))
+# 
+# 
+# 
+# almacen <- agroecology$osm_points
+# almacen <- subset(almacen, subset = almacen$shop == "convenience",select = "shop")
+# names(almacen)[1] <- "Tipo"
+#   
+# prod <- agroecology$osm_points
+# prod <- subset(prod, subset = prod$place == "farm",select ="place")
+# names(prod)[1] <- "Tipo"
+# 
+# feria = agroecology$osm_points
+# feria = subset(feria, subset = feria$amenity == "marketplace",select = "amenity")
+# names(feria)[1] <- "Tipo"
+# 
+# 
+# agroecology <- rbind(almacen,feria,prod)
+# 
+# write_sf(agroecology,"agroecology.geojson")
 
-agroecology <- add_osm_feature(area_opq,key = "agroecology") |>
-  osmdata_sf()
+agroecology <- read_sf("../agroecology.geojson")
+lujan <- read_sf("../lujan.geojson")
 
-                     # subset(agroecology$osm_polygons, 
-                     #        subset = !is.na(agroecology),  
-                     #        select = c("agroecology","place","shop"))
-
-
-almacen <- agroecology$osm_points
-almacen <- subset(almacen, subset = almacen$shop == "convenience")
-
-prod <- agroecology$osm_points
-prod <- subset(prod, subset = prod$place == "farm")
-
-feria = agroecology$osm_points
-feria = subset(feria, subset = feria$amenity == "marketplace")
-
-map <- tm_shape(area) + tm_borders() +
-tm_shape(almacen) + tm_symbols(fill = "black",shape = 1)+
-  tm_shape(feria) + tm_symbols(fill = "blue", shape = 2)+
-  tm_shape(prod) + tm_symbols(fill = "green")+
-  tm_basemap() + tm_scalebar()
+map <- tm_shape(lujan) + tm_borders() +
+tm_shape(agroecology) + tm_symbols(fill = "red", 
+                                 shape="Tipo") 
+  #tm_basemap() 
+  #+ tm_scalebar()
 map
 ```
+
 ## Mapa de Luján
 
+![](img/umap.png){height=6cm}
+
+## Conclusiones
+
+`r fa("check", fill = "green")` OpenStreetMap, como herramienta colaborativa, puede integrarse con la comunidad de la producción agroecológica.
 
 
+`r fa("check", fill = "green")` Es necesario continuar el mapeo del sector rural en OSM.
+
+<!-- `r fa("check", fill = "green")` -->
 
 
 # Referencias
